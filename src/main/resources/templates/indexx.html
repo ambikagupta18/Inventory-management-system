@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Inventory Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container my-2">
+    <h1>User List</h1>
+    <a th:href="@{/showNewUserForm}" class="btn btn-primary btn-sm mb-3"> Register new user </a>
+    <a th:href="@{/showNewUserForm}" class="btn btn-info btn-sm mb-3"> Existing user </a>
+
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>User Phonenumber</th>
+            <th>User Password</th>
+            <th>Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${listUsers}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phonenumber}"></td>
+            <td th:text="${user.password}"></td>
+             <td><a th:href="@{/deleteUser/{id}(id=${users.id})}" class="btn btn-danger">Delete</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+
+</script>
+</body>
+</html>
