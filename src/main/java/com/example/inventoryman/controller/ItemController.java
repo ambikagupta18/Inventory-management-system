@@ -27,23 +27,22 @@ public class ItemController {
     /******************     Login Controller          *********************/
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @GetMapping("/test")
-    public String home(){
+    public String home() {
         return "redirect:/";
     }
-          /******************    Item Controller   ***************/
+
+
+    /******************    Item Controller   ***************/
+
+
     @GetMapping("/")
-    public String viewHomePage(Model model,@Param("keyword") String keyword) {
-        List<Item> listItems = itemService.listAll(keyword);
-        //model.addAttribute("listItems", itemService.getAllItems());
-        model.addAttribute("listItems",listItems);
-        model.addAttribute("keyword", keyword);
-        //model.addAttribute("keywords",itemService.listAll(String keyword));
-       return findPaginated(1,model);
-        //return "index";
+    public String viewHomePage(Model model, @Param("keyword") String keyword) {
+        return findPaginated(1, model, keyword);
 
     }
 
@@ -53,21 +52,16 @@ public class ItemController {
         Item item = new Item();
         model.addAttribute("item", item);
         return "new_item";
-
-
-}
+    }
 
     @PostMapping("/saveProduct")
-    public String saveItem( @Valid @ModelAttribute("item") Item item, BindingResult br) throws IOException {
-        if(br.hasErrors()){
+    public String saveItem(@Valid @ModelAttribute("item") Item item, BindingResult br) throws IOException {
+        if (br.hasErrors()) {
             return "new_item";
-        }
-        else {
+        } else {
             itemService.saveItem(item);
             return "redirect:/";
         }
-
-
     }
 
     @GetMapping("/showFormForUpdate/{id}")
@@ -85,16 +79,18 @@ public class ItemController {
         this.itemService.deleteItemById(id);
         return "redirect:/";
     }
-    @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo")int pageNo,Model model){
-        int pageSize=5;
 
-        Page<Item> page= itemService.findPaginated(pageNo,pageSize);
-        List<Item> listItems =page.getContent();
-        model.addAttribute("currentPage",pageNo);
-        model.addAttribute("totalPages",page.getTotalPages());
-        model.addAttribute("totalItems",page.getTotalElements());
-        model.addAttribute("listItems",listItems);
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model, @Param("keyword") String keyword) {
+        int pageSize = 5;
+
+        Page<Item> page = itemService.findPaginated(pageNo, pageSize, keyword);
+        List<Item> listItems = page.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listItems", listItems);
+        model.addAttribute("keyword", keyword);
         return "index";
     }
 

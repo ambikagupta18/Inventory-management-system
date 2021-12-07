@@ -28,10 +28,6 @@ public class UserController {
     BCryptPasswordEncoder passwordEncoder;
 
 
-    /*@ModelAttribute("user")
-    public User user() {
-        return new User();
-    }*/
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
@@ -53,27 +49,6 @@ public class UserController {
 }
 
 
-
-
-     /*@ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto(){
-        return new UserRegistrationDto();
-    }*/
-
-    /*@GetMapping
-    public String showRegistrationForm() {
-        return "registration";
-    }*/
-
-    /*@PostMapping
-    public String registerUserAccount(@Valid @ModelAttribute("user")UserRegistrationDto registrationDto, BindingResult br){
-    if(br.hasErrors()){
-            return "registration";
-        }
-        else {
-            userService.save(registrationDto);
-            return "redirect:/registration?success";
-        }*/
 
 
 
@@ -135,47 +110,8 @@ public class UserController {
 
 
 
- /*@GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }*/
 
-/*@GetMapping("/login")
-    public String home(Model model){
-       // model.addAttribute("listUsers",listUsers);
-        return "login";
-    }*/
-    /*@GetMapping("/signup")
-    public String signup(Model model){
-        model.addAttribute("user",new User());
-        // model.addAttribute("listUsers",listUsers);
-        return "signup";
-    }
-    @PostMapping("/do_register")
-    public  String registerUser(@ModelAttribute("user") User user, Model model)
-    {
 
-        System.out.println("User" +user);
-        model.addAttribute("user",user);
-        this.repos.save(user);
-        return "signup";
-    }*/
-
-    /*@GetMapping("/tes")
-    @ResponseBody
-    public String test() {
-        User user = new User();
-        user.setName("Ambika");
-        user.setEmail("ambikagupta18@gmail.com");
-        user.setPhonenumber("1234567890");
-        user.setPassword("abcd");
-        repos.save(user);
-        return "working";
-    }*/
 
 

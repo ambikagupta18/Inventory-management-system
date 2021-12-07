@@ -13,7 +13,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotEmpty(message="product name is not empty")
+    @NotEmpty(message = "product name is not empty")
     private String name;
 
     @NotEmpty(message = "quantity is not empty")
@@ -22,10 +22,8 @@ public class Item {
 
     @NotNull(message = "price is not empty")
     @Positive(message = "value must be positive")
-    //@Digits(integer=1, fraction=0, message = "value must be positive and 1 digits whole number")
     private long price;
-    /*@ManyToOne()
-    private User user;*/
+
 
     public long getId() {
         return id;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,18 +20,14 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository repo;
     @Autowired
     private UserRepository repos;
-    /*             ServiceImpl for Items               */
+
+    /************* ServiceImpl for Items *************/
+
+
     @Override
     public List<Item> getAllItems() {
         return repo.findAll();
 
-    }
-    @Override
-    public List<Item> listAll(String keyword) {
-        if (keyword != null) {
-            return repo.search(keyword);
-        }
-        return repo.findAll();
     }
 
     @Override
@@ -56,25 +53,46 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Page<Item> findPaginated(int pageNo, int pageSize) {
-        Pageable pageable= PageRequest.of(pageNo -1,pageSize);
+    public Page<Item> findPaginated(int pageNo, int pageSize, String keyword) {
+        Sort sort = Sort.by("name");
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        if (keyword != null) {
+            return repo.findAll(keyword, pageable);
+        }
         return this.repo.findAll(pageable);
     }
 
+}
 
-    /*   User Login and Register                     */
-   /* @Override
+
+
+    /*********************   User Login and Register ****************************/
+
+
+    /*@Override
     public void saveUser(User user) {
         this.repos.save(user);
     }
+
     @Override
     public List<User> getAllUsers() {
         return repos.findAll();
 
     }
-//delete register user
+
     @Override
     public void deleteUserById(long id) {
         this.repos.deleteById(id);
+    }
+
+    @Override
+    public Page<Item> listAll(int pageNumber, String keyword) {
+        // sortField, String sortDir) {
+        Sort sort = Sort.by("name");
+        //sort= sortDir.equals("asc")? sort.ascending() : sort.descending();
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
+        if (keyword != null) {
+            return repo.findAll(keyword, pageable);
+        }
+        return repo.findAll(pageable);
     }*/
-}

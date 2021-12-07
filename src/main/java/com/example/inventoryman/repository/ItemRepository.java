@@ -13,7 +13,8 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item,Long> {
-    @Query("SELECT p FROM Item p WHERE p.name LIKE %?1%")
 
-    public List<Item> search(String keyword);
+    @Query("SELECT p FROM Item p WHERE p.name LIKE %?1%")
+    public Page<Item> findAll(String keyword,Pageable pageable);
+
 }

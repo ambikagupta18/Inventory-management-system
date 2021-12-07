@@ -9,7 +9,9 @@ import java.util.List;
 
 @Service
 public interface ItemService {
-/*       Service for Item              */
+
+    /******************************  Service for Item ************************/
+
     List<Item> getAllItems();
 
     void saveItem(Item item);
@@ -18,12 +20,13 @@ public interface ItemService {
 
     void deleteItemById(long id);
 
-    List<Item> listAll(String keyword);
+    Page<Item> findPaginated(int pageNo, int pageSize, String keyword);
 
-    Page<Item> findPaginated(int pageNo, int pageSize);
+}
 
-/*   Service for User               */
+   /******************   Service for User *****************/
+
    /* void saveUser(User user);
     List<User> getAllUsers();
     void deleteUserById(long id);*/
-}
+

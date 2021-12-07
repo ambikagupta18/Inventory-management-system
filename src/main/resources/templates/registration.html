@@ -38,14 +38,14 @@
             </div>
 
             <h1>Registration !!</h1>
-<hr>
+            <hr>
             <form th:action="@{/registration}" method="post" th:object="${user}">
 
                 <div class="form-group">
                     <div th:each="e : ${#fields.errors('name')}" th:text="${e}" class="invalid-feedback"></div>
                     <label class="control-label" for="name"> Name </label>
                     <input id="name" class="form-control" type="text" th:field="*{name}"
-                           required  autofocus="autofocus"
+                           required autofocus="autofocus"
                            th:classappend="${#fields.hasErrors('name')? 'is-invalid':''}"/>
                 </div>
 
@@ -81,7 +81,7 @@
                     <span>Already registered? <a href="/" th:href="@{/login}">Login
 								here</a></span>
                 </div>
-<hr>
+                <hr>
             </form>
         </div>
     </div>
@@ -89,93 +89,3 @@
 </body>
 </html>
 
-
-<!--
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Signup Page</title>
-    <style>
-    .body{
-    background:#e2e2e2 !important;
-    }
-    .bg-primary{
-    background: #009688 !important;
-    }
-        .my-card{
-        padding: 20px;
-        background:#FFFFFF;
-        }
-    </style>
-</head>
-<body>
-<section>
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-8 offset-md-2">
-             <div class="my-card">
-
-                 <h1 class="text-center">Signup Here !!</h1>
-
-                 <form action="" th:action="@{/do_register}" method="post" th:object="${user}">
-
-                     &lt;!&ndash; name field &ndash;&gt;
-                         <div class="form-group">
-                             <label for="name" class="form-label">Your Name</label>
-
-                             <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
-                             placeholder="Enter here your name" required />
-                         </div> <br>
-
-                     &lt;!&ndash; email field &ndash;&gt;
-                     <div class="form-group">
-                         <label for="email" class="form-label">Your Email ID</label>
-
-                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                                placeholder="Enter here your Email ID" required />
-                     </div><br>
-
-                     &lt;!&ndash; phone number field &ndash;&gt;
-                     <div class="form-group">
-                         <label for="phonenumber" class="form-label">Your Mobile Number</label>
-
-                         <input type="tel" class="form-control" id="phonenumber" aria-describedby="emailHelp"
-                                placeholder="Enter here your Mobile Number" required th:value="${user.phonenumber}"/>
-
-
-                     </div><br>
-
-                     &lt;!&ndash; password field &ndash;&gt;
-                     <div class="form-group">
-                         <label for="password" class="form-label">Your Password</label>
-
-                         <input type="password" class="form-control" id="password" aria-describedby="emailHelp"
-                                placeholder="Enter here your password" required/>
-
-
-                     </div><br>
-
-                     <div class="container text-center">
-                         <button type="submit" class="btn btn-primary">Submit</button>
-                         <button type="reset" class="btn btn-warning">Reset</button>
-                     </div>
-
-
-
-                 </form>
-
-             </div>
-
-
-
-
-        </div>
-
-
-    </div>
-</div>
-</section>
-</body>
-</html>-->

@@ -19,7 +19,6 @@ public class User {
     private String name;
 
     @NotEmpty(message = "email is not empty")
-    //@Email(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
     @Pattern(regexp = "[6-9]{1}[0-9]{9}",message = "Phone number starting with 6-9 and remaining 9 digit with 0-9")
@@ -27,7 +26,7 @@ public class User {
     private String phonenumber;
 
 
-    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", message = "Must contain at least one number and one uppercase " +
+    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z]).{8,}", message = "Must contain at least one number " +
             "and lowercase letter" + ",\n" + "and at least 8 or more characters")
     @Size(min = 8)
     private String password;
@@ -36,7 +35,6 @@ public class User {
     @JoinTable(name = "user_item", joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "item_id",referencedColumnName = "id"))
 
-    //private Collection<Role> roles;
     private Collection<Item> items;
 
 
@@ -87,14 +85,6 @@ public class User {
     public void setItems(Collection<Item> items) {
         this.items = items;
     }
-    /*public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }*/
-
 
     public User(String name, String email, String phonenumber, String password, Collection<Item> items) {
         this.name = name;
