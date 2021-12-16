@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 //@RequestMapping("/registration")
@@ -26,7 +28,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
-
+@Autowired
+private UserRepository repos;
 
 
     @GetMapping("/registration")
@@ -37,38 +40,29 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registerUserAccount(@Valid @ModelAttribute("user") User user, BindingResult br) {
+        User useremail = repos.findByEmail(user.getEmail());
+        if (useremail != null) {
+            br.rejectValue("email", "error.user", "This email is already registered is our database");
+        }
         if (br.hasErrors()) {
             return "registration";
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.save(user);
-            return "redirect:/registration?success";
         }
+        return "redirect:/registration?success";
 
+
+        /*if (br.hasErrors()) {
+            return "registration";
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userService.save(user);
+
+        }*/
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*@GetMapping("/test")
     public String viewHomePage(Model model) {
         model.addAttribute("listUsers", itemService.getAllUsers());

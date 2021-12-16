@@ -54,8 +54,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Page<Item> findPaginated(int pageNo, int pageSize, String keyword) {
-        Sort sort = Sort.by("name");
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        //Sort sort = Sort.by("name");
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize); //sort);
         if (keyword != null) {
             return repo.findAll(keyword, pageable);
         }
